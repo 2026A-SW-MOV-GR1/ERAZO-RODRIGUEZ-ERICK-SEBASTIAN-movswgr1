@@ -27,3 +27,11 @@ coverage/
 *.key
 *.mobileprovision
 
+# Android build outputs
+android/app/build/
+android/build/
+android/.gradle/
+
+# IDE
+.idea/
+

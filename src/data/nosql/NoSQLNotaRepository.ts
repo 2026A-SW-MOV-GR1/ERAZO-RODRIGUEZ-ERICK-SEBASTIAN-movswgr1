@@ -20,8 +20,15 @@ const generateId = (): string =>
  * almacén sea completamente independiente del almacén SQLite.
  */
 export class NoSQLNotaRepository implements INotaRepository {
-  private storage = new MMKV({id: 'notas-storage'});
   private readonly INDEX_KEY = 'notas:ids';
+  private _storage: MMKV | null = null;
+
+  private get storage(): MMKV {
+    if (!this._storage) {
+      this._storage = new MMKV({id: 'notas-storage'});
+    }
+    return this._storage;
+  }
 
   private getIds(): string[] {
     const raw = this.storage.getString(this.INDEX_KEY);
